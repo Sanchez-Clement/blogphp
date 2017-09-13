@@ -23,6 +23,9 @@
 
 
 <?php
+
+  # code...
+
 try
 {
   $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
@@ -42,13 +45,15 @@ while ($donnees = $reponse->fetch()) {
   <h6><?php echo htmlspecialchars($donnees["titre"]) ?> <em> <?php echo $donnees["date_creation_fr"] ?></em></h6>
   <p><?php echo htmlspecialchars($donnees["contenu"] )?></p>
 <form class="" action="commentaires.php" method="post">
-<input type="hidden" name="id" value="$donnees['id']">
+<input type="hidden" name="id" value="<?php echo $donnees['id']?>">
 <input type="submit" name="" value="Commentaires">
 </form>
 
 </article>
 
-<?php } ?>
+<?php }
+
+?>
 
 </section>
 
