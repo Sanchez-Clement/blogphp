@@ -16,8 +16,43 @@
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
+      <main class=row>
+        <section>
 
 
+
+
+<?php
+try
+{
+  $bdd = new PDO('mysql:host=localhost;dbname=blog;charset=utf8', 'root', 'root');
+}
+catch(Exception $e)
+{
+        die('Erreur : '.$e->getMessage());
+}
+
+$reponse = $bdd->query('SELECT id, titre, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_creation_fr FROM article ORDER BY date_creation DESC LIMIT 0, 5');
+
+while ($donnees = $reponse->fetch()) {
+
+ ?>
+
+<article class="">
+  <h6><?php echo htmlspecialchars($donnees["titre"]) ?> <em> <?php echo $donnees["date_creation_fr"] ?></em></h6>
+  <p><?php echo htmlspecialchars($donnees["contenu"] )?></p>
+<form class="" action="commentaires.php" method="post">
+<input type="hidden" name="id" value="$donnees['id']">
+<input type="submit" name="" value="Commentaires">
+</form>
+
+</article>
+
+<?php } ?>
+
+</section>
+
+</main>
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
