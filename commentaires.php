@@ -16,7 +16,10 @@
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
-      <main class=row>
+      <main class="container">
+        <section class="row">
+
+
 
 <?php
 if (isset($_POST['id'])) {
@@ -30,15 +33,30 @@ catch(Exception $e)
 {
         die('Erreur : '.$e->getMessage());
 }
+$req = $bdd->prepare('SELECT titre, contenu, DATE_FORMAT(date_creation, "%d/%m/%Y à %Hh%imin%ss") AS date_creation_fr FROM article WHERE id=?');
+$req->execute(array($_POST['id']));
+while ($donnees = $req->fetch()) {  ?>
+
+  <article class="billets purple card col s12 m7">
+    <h6><?php echo htmlspecialchars($donnees["titre"]) ?> <em> <?php echo $donnees["date_creation_fr"] ?></em></h6>
+    <p><?php echo htmlspecialchars($donnees["contenu"] )?></p>
+
+
+  </article>
+<?php }; 
+
 
 $req = $bdd->prepare('SELECT  commentaire_article, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire WHERE id_article = ? ORDER BY date_commentaire');
 $req->execute(array($_POST['id']));
 while ($donnees = $req->fetch()) {
 
  ?>
+<article class="red card col s12 m7">
+
 
 <p><?php echo $donnees["commentaire_article"] ?></p>
 <caption><?php echo $donnees["date_commentaire_fr"] ?></caption>
+</article>
 <?php }
 }
 
@@ -49,7 +67,7 @@ header('Location: index.php');
 
 ?>
 
-
+  </section>
 
 
 </main>

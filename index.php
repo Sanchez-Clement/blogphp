@@ -16,8 +16,8 @@
         <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
-      <main class=row>
-        <section>
+      <main class="container">
+        <section id="blog" class="row">
 
 
 
@@ -41,7 +41,7 @@ while ($donnees = $reponse->fetch()) {
 
  ?>
 
-<article class="">
+<article class="billets purple card col s12 m7">
   <h6><?php echo htmlspecialchars($donnees["titre"]) ?> <em> <?php echo $donnees["date_creation_fr"] ?></em></h6>
   <p><?php echo htmlspecialchars($donnees["contenu"] )?></p>
 <form class="" action="commentaires.php" method="post">
