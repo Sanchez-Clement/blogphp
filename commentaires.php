@@ -43,7 +43,7 @@ while ($donnees = $req->fetch()) {  ?>
 
 
   </article>
-<?php }; 
+<?php };
 
 
 $req = $bdd->prepare('SELECT  commentaire_article, DATE_FORMAT(date_commentaire, \'%d/%m/%Y à %Hh%imin%ss\') AS date_commentaire_fr FROM commentaire WHERE id_article = ? ORDER BY date_commentaire');
@@ -68,7 +68,16 @@ header('Location: index.php');
 ?>
 
   </section>
+<section>
+  <form class="" action="commentaire_post.html" method="post">
+    <label for="com">Laisser votre commentaire</label>
+    <input id="com" type="text" name="com" value="">
+    <input type="submit" name="" value="Envoyer">
+  </form>
+  <?php
 
+   ?>
+</section>
 
 </main>
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
